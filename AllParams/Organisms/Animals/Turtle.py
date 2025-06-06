@@ -35,7 +35,7 @@ class Turtle(Animal):
 
     def collision(self, attacker: Organism):
         if attacker.get_id() == self.get_id():
-            if random.randint(0, self.REPRODUCE_CHANCE - 1) == 0:
+            if random.randint(0, super().REPRODUCE_CHANCE - 1) == 0:
                 self.reproduce(attacker)
         elif attacker.get_force() < 5:
             self._game.add_event("odbija atak", self, attacker)

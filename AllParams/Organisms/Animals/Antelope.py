@@ -11,7 +11,6 @@ class Antelope(Animal):
     FORCE = 4
     INITIATIVE = 4
     LOOK = (255, 165, 0)
-    REPRODUCE_CHANCE = 3
 
     def __init__(self, world: World, position: Position, game: Game):
         self._world = world
@@ -39,7 +38,7 @@ class Antelope(Animal):
 
     def collision(self, attacker: Organism):
         if attacker.get_id() == self.get_id():
-            if random.randint(0, self.REPRODUCE_CHANCE - 1) == 0:
+            if random.randint(0, super().REPRODUCE_CHANCE - 1) == 0:
                 self.reproduce(attacker)
         else:
             if random.randint(0, 1) == 1:

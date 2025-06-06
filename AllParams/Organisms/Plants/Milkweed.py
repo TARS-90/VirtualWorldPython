@@ -29,6 +29,6 @@ class Milkweed(Plant):
 
     def action(self):
         for _ in range(3):
-            if random.randint(0, self.spread_chance - 1) == 0:
+            if random.randint(0, self.SPREAD_CHANCE - 1) == 0:
                 self.spread()
                 break
