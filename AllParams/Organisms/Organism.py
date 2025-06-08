@@ -1,20 +1,20 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Union, Tuple
-from AllParams.Organisms import Plant
 
 class Organism(ABC):
-    stampCounter = 0
-    game = None
-    world = None
-    position = None
-    name = None
-    id = None
-    stamp = None
-    force = None
-    initiative = None
-    look = None
-    is_alive = True
+    stamp_counter = 0
 
+    def __init__(self):
+        self.game = None
+        self.world = None
+        self.position = None
+        self.name = None
+        self.id = None
+        self.stamp = None
+        self.force = None
+        self.initiative = None
+        self.look = None
+        self.is_alive = True
 
     # setters
     def set_name(self, value: str):
@@ -33,7 +33,7 @@ class Organism(ABC):
         self.stamp = value
 
     def set_look(self, value: Union[Tuple[int, int, int], object]):
-        self.look = value
+        self.look = f'#{value[0]:02x}{value[1]:02x}{value[2]:02x}'
 
 
     # getters
@@ -72,7 +72,7 @@ class Organism(ABC):
         return self.force > attacker.force
 
     def move(self, position):
-        self.game.add_event("porusza się na", self, position)
+        self.game.add_event("porusza się na", self, pos = position)
         self.position = position
 
     def fight(self, attacker: "Organism"):
@@ -82,6 +82,8 @@ class Organism(ABC):
         else:
             attacker.position = self.position
             self.kill(self)
+
+            from AllParams.Organisms.Plant import Plant
             if isinstance(self, Plant):
                 self.game.add_event("zjada", attacker, self)
             else:

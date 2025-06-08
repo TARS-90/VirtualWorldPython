@@ -1,9 +1,10 @@
 import random
-from AllParams.Organisms import Animal
-from AllParams.Organisms import Organism
-from AllParams import Position
-from AllParams import World
-from AllParams import Game
+from AllParams.Organisms.Animal import Animal
+from AllParams.Organisms.Organism import Organism
+from AllParams.Position import Position
+from AllParams.World import World
+from AllParams.Game import Game
+
 
 class Fox(Animal):
     NAME = "Lis"
@@ -13,9 +14,10 @@ class Fox(Animal):
     LOOK = (255, 69, 0)
 
     def __init__(self, world: World, position: Position, game: Game):
-        self._world = world
-        self._position = position
-        self._game = game
+        super().__init__()
+        self.world = world
+        self.position = position
+        self.game = game
 
         # Stamp counter incrementation
         Organism.stamp_counter += 1
@@ -28,10 +30,10 @@ class Fox(Animal):
         self.set_look(self.LOOK)
 
     def action(self):
-        neigh_positions = self._world.get_available_positions(self)
+        neigh_positions = self.world.get_available_positions(self)
         if neigh_positions:
             destination = random.choice(neigh_positions)
-            enemy = self._world.get_organism_at(destination)
+            enemy = self.world.get_organism_at_position(destination)
 
             if enemy:
                 if enemy.get_force() <= self.get_force():

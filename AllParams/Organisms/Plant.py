@@ -1,18 +1,18 @@
 import random
-from AllParams.Organisms import Organism
+from AllParams.Organisms.Organism import Organism
 
 class Plant(Organism):
     SPREAD_CHANCE = 8
 
     def spread(self):
-        neigh_positions = self.world.getFreeNeighbourPositions(self)
+        neigh_positions = self.world.get_free_neighbour_positions(self)
         num_of_positions = len(neigh_positions)
 
         if num_of_positions > 0:
             position = random.choice(neigh_positions)
-            self.world.createOrganism(self.id, position)
+            self.world.create_organism(self.id, position)
             if self.game:
-                self.game.add_event("rozsiewa się na", self, position)
+                self.game.add_event("rozsiewa się na", self, pos = position)
 
     def action(self):
         if random.randint(0, self.SPREAD_CHANCE - 1) == 0:

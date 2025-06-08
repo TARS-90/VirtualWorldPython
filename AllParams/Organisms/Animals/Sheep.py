@@ -1,8 +1,9 @@
-from AllParams.Organisms import Animal
-from AllParams.Organisms import Organism
-from AllParams import Position
-from AllParams import World
-from AllParams import Game
+from AllParams.Organisms.Animal import Animal
+from AllParams.Organisms.Organism import Organism
+from AllParams.Position import Position
+from AllParams.World import World
+from AllParams.Game import Game
+
 
 class Sheep(Animal):
     NAME = "Owca"
@@ -12,9 +13,10 @@ class Sheep(Animal):
     LOOK = (211, 211, 211)
 
     def __init__(self, world: World, position: Position, game: Game):
-        self._world = world
-        self._position = position
-        self._game = game
+        super().__init__()
+        self.world = world
+        self.position = position
+        self.game = game
 
         # Stamp counter incrementation
         Organism.stamp_counter += 1

@@ -1,9 +1,8 @@
-from AllParams.Organisms import Plant
-from AllParams.Organisms import Animal
-from AllParams.Organisms import Organism
-from AllParams import Position
-from AllParams import World
-from AllParams import Game
+from AllParams.Organisms.Plant import Plant
+from AllParams.Organisms.Organism import Organism
+from AllParams.Position import Position
+from AllParams.World import World
+from AllParams.Game import Game
 
 class Hogweed(Plant):
     NAME = "Barszcz sosnowskiego"
@@ -13,9 +12,10 @@ class Hogweed(Plant):
     LOOK = (128, 128, 0)
 
     def __init__(self, world: World, position: Position, game: Game):
-        self._world = world
-        self._position = position
-        self._game = game
+        super().__init__()
+        self.world = world
+        self.position = position
+        self.game = game
 
         # Stamp counter incrementation
         Organism.stamp_counter += 1
@@ -30,15 +30,17 @@ class Hogweed(Plant):
     def action(self):
         for dx in range(-1, 2):
             for dy in range(-1, 2):
-                x = self._position.x + dx
-                y = self._position.y + dy
-                organism = self._world.get_organism_at_coords(x, y)
+                x = self.position.x + dx
+                y = self.position.y + dy
+                organism = self.world.get_organism_at(x, y)
+
+                from AllParams.Organisms.Animal import Animal
                 if isinstance(organism, Animal):
                     self.kill(organism)
-                    self._game.add_event("zabija", self, organism)
+                    self.game.add_event("zabija", self, organism)
 
     def collision(self, attacker: Organism):
         self.kill(attacker)
         self.kill(self)
-        self._game.add_event("zjada", attacker, self)
-        self._game.add_event("zabija", self, attacker)
+        self.game.add_event("zjada", attacker, self)
+        self.game.add_event("zabija", self, attacker)

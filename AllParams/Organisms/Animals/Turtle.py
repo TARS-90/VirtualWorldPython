@@ -1,9 +1,10 @@
 import random
-from AllParams.Organisms import Animal
-from AllParams.Organisms import Organism
-from AllParams import Position
-from AllParams import World
-from AllParams import Game
+from AllParams.Organisms.Animal import Animal
+from AllParams.Organisms.Organism import Organism
+from AllParams.Position import Position
+from AllParams.World import World
+from AllParams.Game import Game
+
 
 
 class Turtle(Animal):
@@ -14,9 +15,10 @@ class Turtle(Animal):
     LOOK = (85, 107, 47)
 
     def __init__(self, world: World, position: Position, game: Game):
-        self._world = world
-        self._position = position
-        self._game = game
+        super().__init__()
+        self.world = world
+        self.position = position
+        self.game = game
 
         # Stamp counter incrementation
         Organism.stamp_counter += 1
@@ -38,6 +40,6 @@ class Turtle(Animal):
             if random.randint(0, super().REPRODUCE_CHANCE - 1) == 0:
                 self.reproduce(attacker)
         elif attacker.get_force() < 5:
-            self._game.add_event("odbija atak", self, attacker)
+            self.game.add_event("odbija atak", self, attacker)
         else:
             self.fight(attacker)

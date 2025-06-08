@@ -1,9 +1,9 @@
 import random
-from AllParams.Organisms import Animal
-from AllParams.Organisms import Organism
-from AllParams import Position
-from AllParams import World
-from AllParams import Game
+from AllParams.Organisms.Animal import Animal
+from AllParams.Organisms.Organism import Organism
+from AllParams.Position import Position
+from AllParams.World import World
+from AllParams.Game import Game
 
 class Antelope(Animal):
     NAME = "Antylopa"
@@ -13,9 +13,10 @@ class Antelope(Animal):
     LOOK = (255, 165, 0)
 
     def __init__(self, world: World, position: Position, game: Game):
-        self._world = world
-        self._position = position
-        self._game = game
+        super().__init__()
+        self.world = world
+        self.position = position
+        self.game = game
 
         # Stamp counter incrementation
         Organism.stamp_counter += 1
@@ -28,11 +29,11 @@ class Antelope(Animal):
         self.set_look(self.LOOK)
 
     def _run_away(self, attacker: Organism):
-        free_positions = self._world.get_free_neighbour_positions(self)
+        free_positions = self.world.get_free_neighbour_positions(self)
         if free_positions:
             new_position = random.choice(free_positions)
-            self._game.add_event("ucieka na", self, self._position)
-            self._position = new_position
+            self.game.add_event("ucieka na", self, pos = self.position)
+            self.position = new_position
         else:
             self.fight(attacker)
 
