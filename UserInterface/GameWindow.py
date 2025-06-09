@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Canvas
+from tkinter import Canvas, Text, END
 
 
 class GameWindow:
@@ -19,6 +19,9 @@ class GameWindow:
             bg="white"
         )
         self.canvas.pack()
+
+        self.event_log = Text(self.root, height=20, width=50, state="disabled", wrap="word")
+        self.event_log.pack(pady=10)
 
         self.next_turn_button = tk.Button(self.root, text="Następna tura", command=self.next_turn)
         self.next_turn_button.pack(pady=10)
@@ -59,6 +62,7 @@ class GameWindow:
         self.game.next_round()
         self.tour_label.config(text=f"Tura: {self.game.tour}")
         self.draw_world()
+        self.update_event_log(self.game.events)
 
     def set_new_world(self, world):
         self.world = world
@@ -67,3 +71,10 @@ class GameWindow:
             height=self.world.size_y * self.TILE_SIZE
         )
         self.draw_world()
+
+    def update_event_log(self, events):
+        self.event_log.config(state="normal")
+        self.event_log.delete("1.0", END)
+        for event in events:
+            self.event_log.insert(END, event + "\n")
+        self.event_log.config(state="disabled")
