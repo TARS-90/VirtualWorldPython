@@ -72,6 +72,7 @@ class World:
         from AllParams.Organisms.Plants import Grass, Milkweed, Guarana, NightshadeBerries, Hogweed
 
         cls_map = {
+            10: Human.Human,
             11: Wolf.Wolf,
             12: Sheep.Sheep,
             13: Fox.Fox,

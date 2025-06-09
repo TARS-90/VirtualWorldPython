@@ -3,7 +3,7 @@ from tkinter import Canvas
 
 
 class GameWindow:
-    TILE_SIZE = 30  # Rozmiar pojedynczego pola (kwadratu)
+    TILE_SIZE = 30
 
     def __init__(self, game, world):
         self.game = game
@@ -12,7 +12,6 @@ class GameWindow:
         self.root = tk.Tk()
         self.root.title("Symulacja świata")
 
-        # Kanwa do rysowania organizmów
         self.canvas = Canvas(
             self.root,
             width=world.size_x * self.TILE_SIZE,
@@ -21,19 +20,15 @@ class GameWindow:
         )
         self.canvas.pack()
 
-        # Przycisk do przejścia do kolejnej tury
         self.next_turn_button = tk.Button(self.root, text="Następna tura", command=self.next_turn)
         self.next_turn_button.pack(pady=10)
-
 
         self.save_button = tk.Button(self.root, text="Zapisz", command=game.save_game)
         self.save_button.pack(pady=10)
 
-
         self.read_button = tk.Button(self.root, text="Wczytaj", command=self.read_game)
         self.read_button.pack(pady=10)
 
-        # Label na aktualną turę
         self.tour_label = tk.Label(self.root, text="Tura: 0")
         self.tour_label.pack()
 
@@ -49,7 +44,7 @@ class GameWindow:
         self.canvas.delete("all")
 
         for organism in self.world.get_organisms():
-            x = organism.position.x - 1  # tkinter zaczyna od 0
+            x = organism.position.x - 1
             y = organism.position.y - 1
             self.draw_square(x, y, organism.look)
 
