@@ -92,6 +92,10 @@ class Organism(ABC):
     def kill(self, organism: "Organism"):
         organism.is_alive = False
 
+        from AllParams.Organisms.Animals.CyberSheep import CyberSheep
+        if isinstance(organism, CyberSheep):
+            self.world.hogweeds.remove(organism)
+
     def increase_force(self, organism: "Organism", value: int):
         if organism.force is None:
             organism.force = value

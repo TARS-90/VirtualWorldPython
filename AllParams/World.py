@@ -8,6 +8,7 @@ class World:
         self.game = game
         self.organisms = []
         self.organisms_to_add = []
+        self.hogweeds = []
 
     def get_organisms(self):
         return sorted(self.organisms, key=lambda o: (-o.initiative, o.stamp))
@@ -68,7 +69,7 @@ class World:
         return result
 
     def create_organism(self, id_, position):
-        from AllParams.Organisms.Animals import Human, Wolf, Sheep, Fox, Turtle, Antelope
+        from AllParams.Organisms.Animals import Human, Wolf, Sheep, Fox, Turtle, Antelope, CyberSheep
         from AllParams.Organisms.Plants import Grass, Milkweed, Guarana, NightshadeBerries, Hogweed
 
         cls_map = {
@@ -78,6 +79,7 @@ class World:
             13: Fox.Fox,
             14: Turtle.Turtle,
             15: Antelope.Antelope,
+            16: CyberSheep.CyberSheep,
             21: Grass.Grass,
             22: Milkweed.Milkweed,
             23: Guarana.Guarana,
@@ -88,6 +90,9 @@ class World:
         if organism_class:
             new_org = organism_class(self, position, self.game)
             self.organisms_to_add.append(new_org)
+
+            if isinstance(new_org, CyberSheep.CyberSheep):
+                self.hogweeds.append(new_org)
 
     def add_all_organisms_to_be_added(self):
         self.organisms.extend(self.organisms_to_add)

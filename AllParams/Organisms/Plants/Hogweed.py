@@ -35,12 +35,18 @@ class Hogweed(Plant):
                 organism = self.world.get_organism_at(x, y)
 
                 from AllParams.Organisms.Animal import Animal
-                if isinstance(organism, Animal):
+                from AllParams.Organisms.Animals.CyberSheep import CyberSheep
+                if isinstance(organism, Animal) and not isinstance(organism, CyberSheep):
                     self.kill(organism)
                     self.game.add_event("zabija", self, organism)
 
     def collision(self, attacker: Organism):
-        self.kill(attacker)
-        self.kill(self)
-        self.game.add_event("zjada", attacker, self)
-        self.game.add_event("zabija", self, attacker)
+        from AllParams.Organisms.Animals.CyberSheep import CyberSheep
+        if isinstance(attacker, CyberSheep):
+            self.kill(self)
+            self.game.add_event("zjada", attacker, self)
+        else:
+            self.kill(attacker)
+            self.kill(self)
+            self.game.add_event("zjada", attacker, self)
+            self.game.add_event("zabija", self, attacker)

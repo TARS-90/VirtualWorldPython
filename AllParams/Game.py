@@ -49,6 +49,7 @@ class Game:
 
     def init_animals(self, n):
         self.init_organism(10)  # Human
+        self.init_organism(16)
         for _ in range(n):
             id_ = random.randint(11, 15)
             self.init_organism(id_)
