@@ -6,7 +6,7 @@ from UserInterface.GameWindow import GameWindow
 
 
 class Game:
-    MAX_EVENTS = 35
+    MAX_EVENTS = 20
 
     def __init__(self, size_x, size_y, num_a, num_p):
         self.events = deque()
