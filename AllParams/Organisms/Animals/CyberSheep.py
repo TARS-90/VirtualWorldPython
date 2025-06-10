@@ -32,7 +32,7 @@ class CyberSheep(Animal):
     def action(self):
         if len(self.world.hogweeds) > 0:
             hogweed = self.world.hogweeds[0]
-            destination = self.position
+            destination = Position(self.position.x, self.position.y)
 
             if hogweed.position.x > self.position.x:
                 destination.x += 1
@@ -43,10 +43,10 @@ class CyberSheep(Animal):
             if hogweed.position.y < self.position.y:
                 destination.y -= 1
 
-            enemy = self.world.get_organism_at(destination.x, destination.y)
-            if enemy is not None:
+            enemy = self.world.get_organism_at_position(destination)
+            if enemy is not None and not isinstance(enemy, CyberSheep):
                 enemy.collision(self)
             else:
-                self.move(destination)
+                 self.move(destination)
         else:
             super().action()

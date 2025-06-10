@@ -15,8 +15,8 @@ class Game:
         self.tour = 0
         self.does_initialization_end = False
 
-        self.init_animals(num_a)
-        self.init_plants(num_p)
+        self.init_animals(0)
+        self.init_plants(0)
         self.does_initialization_end = True
 
     # Gettery
@@ -49,7 +49,7 @@ class Game:
 
     def init_animals(self, n):
         self.init_organism(10)  # Human
-        self.init_organism(16)
+        self.init_organism(16)  # Cyber sheep
         for _ in range(n):
             id_ = random.randint(11, 15)
             self.init_organism(id_)

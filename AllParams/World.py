@@ -91,7 +91,7 @@ class World:
             new_org = organism_class(self, position, self.game)
             self.organisms_to_add.append(new_org)
 
-            if isinstance(new_org, CyberSheep.CyberSheep):
+            if isinstance(new_org, Hogweed.Hogweed):
                 self.hogweeds.append(new_org)
 
     def add_all_organisms_to_be_added(self):

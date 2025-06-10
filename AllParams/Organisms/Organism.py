@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Union, Tuple
 
+
 class Organism(ABC):
     stamp_counter = 0
 
@@ -92,8 +93,8 @@ class Organism(ABC):
     def kill(self, organism: "Organism"):
         organism.is_alive = False
 
-        from AllParams.Organisms.Animals.CyberSheep import CyberSheep
-        if isinstance(organism, CyberSheep):
+        from AllParams.Organisms.Plants.Hogweed import Hogweed
+        if isinstance(organism, Hogweed):
             self.world.hogweeds.remove(organism)
 
     def increase_force(self, organism: "Organism", value: int):

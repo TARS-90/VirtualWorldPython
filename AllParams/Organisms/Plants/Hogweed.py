@@ -43,6 +43,7 @@ class Hogweed(Plant):
     def collision(self, attacker: Organism):
         from AllParams.Organisms.Animals.CyberSheep import CyberSheep
         if isinstance(attacker, CyberSheep):
+            attacker.move(self.position)
             self.kill(self)
             self.game.add_event("zjada", attacker, self)
         else:
